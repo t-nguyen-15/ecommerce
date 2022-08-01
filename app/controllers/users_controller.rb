@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       reset_session
       log_in @user
       flash[:success] = "Welcome to the Ecommerce!"
-      redirect_to @user
+      redirect_to root_path
     else
       render 'new', status: :unprocessable_entity
     end
