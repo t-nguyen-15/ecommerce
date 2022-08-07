@@ -17,16 +17,16 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_select 'div.field_with_errors'
   end
 
-  test "valid signup information" do
-    assert_difference 'User.count', 1 do
-      post users_path, params: { user: { name:  "Example User",
-                                         role: "true",
-                                         email: "user@example.com",
-                                         password:              "password",
-                                         password_confirmation: "password" } }
-    end
-    follow_redirect!
-    assert_template root_path
-    assert is_logged_in?
-  end
+  # test "valid signup information" do
+  #   assert_difference 'User.count', 1 do
+  #     post users_path, params: { user: { name:  "Example User",
+  #                                        role: "true",
+  #                                        email: "user@example.com",
+  #                                        password:              "password",
+  #                                        password_confirmation: "password" } }
+  #   end
+  #   follow_redirect!
+  #   assert_template root_path
+  #   assert is_logged_in?
+  # end
 end
