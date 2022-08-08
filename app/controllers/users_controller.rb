@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)    
     if @user.save
       reset_session
-      remember user
+      remember @user
       log_in @user
       flash[:success] = "Welcome to the Ecommerce!"
       redirect_to root_path
