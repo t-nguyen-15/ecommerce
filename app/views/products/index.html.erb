@@ -1,0 +1,17 @@
+<% provide(:title, 'Products') %>
+<div class="center jumbotron">
+  <h1>Welcome to the Ecommerce</h1>
+  <% if !logged_in? %>
+    <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <h3>Products</h3>
+        <%= will_paginate @products %>
+        <ol class="products">
+        <%= render @products %>
+        </ol>
+        <%= will_paginate @products %>
+  </div>
+</div>

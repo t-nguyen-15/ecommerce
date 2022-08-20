@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :products, dependent: :destroy
     attr_accessor :remember_token, :reset_token
     before_save   :downcase_email
     validates :name, presence: true, length: { maximum: 50 }
@@ -27,6 +28,18 @@ class User < ApplicationRecord
     def remember 
         self.remember_token = User.new_token
         update_attribute(:remember_digest, User.digest(remember_token))
+        remember_digest
+    end
+
+    # Returns true if the given user is the current user.
+    def current_user?(user)
+        user && user == current_user
+    end
+
+    # Returns a session token to prevent session hijacking.
+    # We reuse the remember digest for convenience.
+    def session_token
+        remember_digest || remember
     end
 
     # Returns true if the given token matches the digest
