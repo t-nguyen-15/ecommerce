@@ -6,8 +6,8 @@ User.create!(name:  "Tony Nguyen",
              role:     true,
              password_confirmation: "foobar")
 
-# Generate a bunch of additional sellers.
-99.times do |n|
+# Generate 5 sellers.
+5.times do |n|
     name  = Faker::Name.name
     email = "example-#{n+1}@example.org"
     password = "password"
@@ -15,6 +15,18 @@ User.create!(name:  "Tony Nguyen",
                  email: email,
                  password:              password,
                  role: true,
+                 password_confirmation: password)
+end
+
+# Generate 90 buyers.
+90.times do |n|
+    name  = Faker::Name.name
+    email = "example-#{n+1+5}@example.org"
+    password = "password"
+    User.create!(name:  name,
+                 email: email,
+                 password:              password,
+                 role: false,
                  password_confirmation: password)
 end
 
