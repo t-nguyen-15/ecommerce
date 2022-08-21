@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
     before_action :logged_in_user, only:[:new, :create, :destroy]
     before_action :correct_user,   only: :destroy
     def index
-        @products = Product.paginate(page: params[:page])
+        @products = Product.paginate(page: params[:page], per_page: 5)
     end
 
     def new 

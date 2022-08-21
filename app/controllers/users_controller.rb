@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @product = current_user.products.build
-    @products = @user.products.paginate(page: params[:page])
+    @products = @user.products.paginate(page: params[:page], per_page: 5)
   end
 
   def new
