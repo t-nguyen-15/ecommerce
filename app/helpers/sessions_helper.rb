@@ -1,5 +1,5 @@
 module SessionsHelper
-
+    # session[:user_id] = user.id
     # Logs in the given user.
     def log_in(user)
         session[:user_id] = user.id 
@@ -53,5 +53,10 @@ module SessionsHelper
         forget(current_user)
         reset_session 
         @current_user = nil 
+    end
+
+    # Stores the URL trying to be accessed.
+    def store_location
+        session[:forwarding_url] = request.original_url if request.get?
     end
 end
