@@ -5,21 +5,27 @@
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
     <% else %>
 </div>
- 
+<details>
+  <summary>Shopping Cart</summary>
+  <% if @cart.empty? %>
+    <p>No itmes in cart.</p>
+  <% else %>
+    <ul>
+      <% @cart.each do |product| %>
+        <li><%= product.name %></li> <%= button_to 'remove from cart', remove_from_cart_path(product), method: :delete %>
+      <% end %>
+    </ul>
+  <% end %>
+</details>
 <div class="row">
   <div class="col-md-8">
-    <h3>Products</h3>
-        <% if !@products.nil? %>
+    <h3>All Products</h3>
         <%= will_paginate @products %>
-        <% end %>
         <ol class="products">
-        <% if !@products.nil? %>
-        <%= render @products %>
-        <% end %>
+          <%= render @products %>
         </ol>
-        <% if !@products.nil? %>
         <%= will_paginate @products %>
-        <% end %>
+    
   </div>
 </div>
 <% end %>
