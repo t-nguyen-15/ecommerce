@@ -1,8 +1,18 @@
 <li id="product-<%= product.id %>">
 <span class="name"><%= product.name %></span>
-<span class="content"><%= product.description %></span>
+<span class="content">
+<% if product.image.attached? %>
+  <%= image_tag product.image.variant(:display) %>
+<% end %>
+<%= product.description %>
+</span>
 <span class="price">$<%= product.price %></span>
 <span class="timestamp">
   Posted <%= time_ago_in_words(product.created_at) %> ago.
+  <% if current_user?(product.user) %>
+      <%= link_to "delete", product, data: { "turbo-method": :delete,
+                                               turbo_confirm: "You sure?" } %>
+      <%= link_to "edit", edit_product_path(product) %>
+  <% end %>
 </span>
 </li>

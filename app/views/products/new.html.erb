@@ -1,0 +1,24 @@
+<% provide(:title, 'New Product') %>
+<h1>New Product</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_with(model: @product) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :description %>
+      <%= f.text_area :description, class: 'form-control' %>
+
+      <%= f.label :price %>
+      <%= f.text_field :price, class: 'form-control' %>
+
+      <%= f.submit "Create new product", class: "btn btn-primary" %>
+      <span class="image">
+        <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+      </span>
+    <% end %>
+  </div>
+</div>

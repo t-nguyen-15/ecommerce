@@ -3,15 +3,23 @@
   <h1>Welcome to the Ecommerce</h1>
   <% if !logged_in? %>
     <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-  <% end %>
+    <% else %>
 </div>
+ 
 <div class="row">
   <div class="col-md-8">
     <h3>Products</h3>
+        <% if !@products.nil? %>
         <%= will_paginate @products %>
+        <% end %>
         <ol class="products">
+        <% if !@products.nil? %>
         <%= render @products %>
+        <% end %>
         </ol>
+        <% if !@products.nil? %>
         <%= will_paginate @products %>
+        <% end %>
   </div>
 </div>
+<% end %>

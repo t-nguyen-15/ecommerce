@@ -5,7 +5,8 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
-      </h1>
+      </h1><br><br><br><br>
+      <%= link_to "Add new product!", new_product_path, class: "btn btn-lg btn-primary" %>
     </section>
   </aside>
   <div class="col-md-8">
