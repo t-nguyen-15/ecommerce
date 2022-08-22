@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
+  get 'reviews/create'
+  get 'reviews/new'
   default_url_options :host => "tony-ecommerce.herokuapp.com/"
   get 'password_resets/new'
   get 'password_resets/edit'
@@ -13,5 +16,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   resources :users
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :products
+  resources :products do 
+    resources :reviews, except: [:show, :index]
+  end
 end

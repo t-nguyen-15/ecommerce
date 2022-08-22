@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+    before_action :set_product, only: %i[ show edit update destroy ]
     before_action :logged_in_user, only:[:new, :create, :destroy]
     before_action :correct_user,   only: :destroy
     before_action :initialize_session
@@ -28,8 +29,9 @@ class ProductsController < ApplicationController
       @product = current_user.products.build if logged_in?
     end
 
-    # def show
-    # end
+    def show
+      @reviews = Review.where(product_id: @product.id).order("created_at DESC")
+    end
 
     def create
         @product = current_user.products.build(product_params)
@@ -43,14 +45,12 @@ class ProductsController < ApplicationController
       end
 
     def edit 
-      @product = Product.find(params[:id])
     end
 
     def update
-      @product = Product.find(params[:id])
       if @product.update(product_params)
         flash[:success] = "Product updated"
-        redirect_to current_user
+        redirect_to root_path
       else
         render 'edit', status: :unprocessable_entity
       end
@@ -67,6 +67,10 @@ class ProductsController < ApplicationController
     end
 
     private 
+        # Use callbacks to share common setup or constraints between actions.
+        def set_product
+          @product = Product.find(params[:id])
+        end
         def product_params
             params.require(:product).permit(:name, :description, :price, :image)
         end
